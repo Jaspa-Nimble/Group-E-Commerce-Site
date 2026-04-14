@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
   revealOnScroll();
   updateCartCount();
   loadCart();
+  loadTheme();
 });
 
 function highlightCurrentPage() {
@@ -291,4 +292,21 @@ function updateShipping() {
   document.getElementById("shipping-cost").textContent = "$" + shipping.toFixed(2);
   document.getElementById("cart-tax").textContent = "$" + tax.toFixed(2);
   document.getElementById("cart-total").textContent = "$" + total.toFixed(2);
+}
+
+function toggleTheme() {
+  document.body.classList.toggle("dark-theme");
+
+  if (document.body.classList.contains("dark-theme")) {
+    localStorage.setItem("theme", "dark");
+  } else {
+    localStorage.setItem("theme", "light");
+  }
+}
+
+function loadTheme() {
+  const theme = localStorage.getItem("theme");
+  if (theme === "dark") {
+    document.body.classList.add("dark-theme");
+  }
 }
