@@ -440,7 +440,7 @@ body {
   --text-dark: #e2e8f0;
   --text-body: #cbd5f5;
   --text-soft: #94a3b8;
-  --card-bg: #ffffff;
+  --card-bg: #1e293b;
   --card-border: #1e293b;
   --success-bg: #052e16;
   --success-border: #14532d;
@@ -449,11 +449,11 @@ body {
   color: #e2e8f0
 }
 
-dark-theme .form-control, 
+.dark-theme .form-control, 
 .dark-theme .form-select {
-  background-color: #0f172a;
-  border-color: #334155;
-  color: #f1f5f9; 
+  background-color: #0f172a !important;
+  border-color: #334155 !important;
+  color: #f1f5f9 !important; 
 }
 
 .dark-theme .form-control::placeholder {
@@ -475,4 +475,10 @@ dark-theme .form-control,
 
 .dark-theme .cart-item-row {
   border-bottom: 1px solid #334155; 
+}
+
+.dark-theme h3, 
+.dark-theme h5,
+.dark-theme .total-row {
+  color: #ffffff !important;
 }
