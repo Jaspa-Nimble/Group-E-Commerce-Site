@@ -440,9 +440,39 @@ body {
   --text-dark: #e2e8f0;
   --text-body: #cbd5f5;
   --text-soft: #94a3b8;
-  --card-bg: linear-gradient(180deg, #020617, #020617);
+  --card-bg: #ffffff;
   --card-border: #1e293b;
   --success-bg: #052e16;
   --success-border: #14532d;
   --success-text: #bbf7d0;
+
+  color: #e2e8f0
+}
+
+dark-theme .form-control, 
+.dark-theme .form-select {
+  background-color: #0f172a;
+  border-color: #334155;
+  color: #f1f5f9; 
+}
+
+.dark-theme .form-control::placeholder {
+  color: #64748b;
+}
+
+.dark-theme .form-label, 
+.dark-theme .form-check-label {
+  color: var(--text-dark); 
+}
+
+.dark-theme .text-muted {
+  color: #94a3b8 !important; 
+}
+
+.dark-theme .summary-row {
+  color: var(--text-body);
+}
+
+.dark-theme .cart-item-row {
+  border-bottom: 1px solid #334155; 
 }
