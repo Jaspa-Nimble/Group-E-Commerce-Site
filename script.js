@@ -165,6 +165,7 @@ function loadCart() {
   subtotalDiv.textContent = "$" + subtotal.toFixed(2);
   taxDiv.textContent = "$" + tax.toFixed(2);
   totalDiv.textContent = "$" + total.toFixed(2);
+  updateShipping();
 }
 
 function sendMessage() {
@@ -192,4 +193,102 @@ function sendMessage() {
   emailInput.value = "";
   subjectInput.value = "";
   messageInput.value = "";
+}
+function placeOrder() {
+  const inputs = document.querySelectorAll(".form-box input");
+
+
+for (let input of inputs) {
+  if (input.value.trim() === "") {
+    alert("Please fill in all fields before placing your order.");
+    return;
+  }
+}
+
+
+const cardNumber = document.getElementById("card-number").value.replace(/\s/g, "");
+const exp = document.getElementById("card-exp").value;
+const cvv = document.getElementById("card-cvv").value;
+
+if (cardNumber.length !== 16) {
+  alert("Card number must be 16 digits.");
+  return;
+}
+
+if (!/^\d{2}\/\d{2}$/.test(exp)) {
+  alert("Expiration must be in MM/YY format.");
+  return;
+}
+
+const month = parseInt(exp.split("/")[0]);
+if (month < 1 || month > 12) {
+  alert("Expiration month must be between 01 and 12.");
+  return;
+}
+
+if (cvv.length !== 3) {
+  alert("CVV must be 3 digits.");
+  return;
+}
+
+  
+  localStorage.removeItem("cartItems");
+  updateCartCount();
+  loadCart();
+
+  
+  const successBox = document.getElementById("order-success");
+  if (successBox) {
+    successBox.style.display = "block";
+    successBox.scrollIntoView({ behavior: "smooth" });
+  }
+
+ 
+  const btn = document.querySelector(".send-btn");
+  if (btn) {
+    btn.disabled = true;
+    btn.textContent = "Order Placed";
+  }
+}
+
+function formatCardNumber(input) {
+  let digits = input.value.replace(/\D/g, "");
+
+  digits = digits.substring(0, 16);
+
+  let formatted = digits.replace(/(.{4})/g, "$1 ").trim();
+
+  input.value = formatted;
+}
+
+function formatExpiration(input) {
+  let digits = input.value.replace(/\D/g, "");
+
+  digits = digits.substring(0, 4);
+
+  if (digits.length >= 3) {
+    input.value = digits.substring(0, 2) + "/" + digits.substring(2);
+  } else {
+    input.value = digits;
+  }
+}
+
+function formatCVV(input) {
+  let digits = input.value.replace(/\D/g, "");
+  input.value = digits.substring(0, 3);
+}
+function updateShipping() {
+  const selected = document.querySelector('input[name="shipping"]:checked');
+  if (!selected) return;
+
+  const shipping = parseFloat(selected.value);
+
+  const subtotal = parseFloat(document.getElementById("cart-subtotal").textContent.replace("$", ""));
+
+  const tax = (subtotal + shipping) * 0.08;
+  const total = subtotal + shipping + tax;
+
+  document.getElementById("shipping-cost").textContent = "$" + shipping.toFixed(2);
+  document.getElementById("cart-tax").textContent = "$" + tax.toFixed(2);
+  document.getElementById("cart-total").textContent = "$" + total.toFixed(2);
 }
