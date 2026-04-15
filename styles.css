@@ -5,7 +5,6 @@
   --btn: #707078;
   --btn-hover: #554640;
 
-  /* 🎯 IMPROVED READABILITY (LIGHT MODE) */
   --text-dark: #554640;
   --text-body: #4f4f57;
   --text-soft: #6b6b75;
@@ -24,7 +23,6 @@
   --radius-md: 8px;
 }
 
-/* 🌗 SMOOTH TRANSITIONS */
 body {
   font-family: Arial, sans-serif;
   background: var(--bg);
@@ -74,7 +72,6 @@ footer a {
   margin: 0 8px;
 }
 
-/* 🌗 TRANSITIONS FOR UI ELEMENTS */
 .custom-navbar,
 footer,
 .hero-box,
@@ -172,36 +169,11 @@ select {
   font-weight: 700;
 }
 
-.hero-box h2 {
-  margin-bottom: 1rem;
-}
-
-.feature-card h3 {
-  font-size: 1.25rem;
-}
-
-.team-card h3 {
-  font-size: 1.15rem;
-}
-
-.product-card h3 {
-  font-size: 1.2rem;
-}
-
-.contact-box h2 {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-}
-
 .content-box h2 {
   border-left: 5px solid #554640;
   padding-left: 10px;
   margin-top: 1.5rem;
   font-size: 1.4rem;
-}
-
-.content-box h2:first-child {
-  margin-top: 0;
 }
 
 .hero-box p {
@@ -223,7 +195,6 @@ select {
   min-height: 48px;
 }
 
-/* 🎯 FIXED FEATURE CARD TEXT */
 .feature-card p {
   color: var(--text-soft);
   margin-bottom: 0;
@@ -250,7 +221,6 @@ select {
 .cart-btn:hover,
 .send-btn:hover {
   background-color: var(--btn-hover);
-  color: white;
   transform: translateY(-2px);
 }
 
@@ -341,12 +311,12 @@ select {
 #cart-message {
   display: none;
   text-align: center;
-  background: linear-gradient(135deg, #cde6f5, #8da7be);
+  background: linear-gradient(to bottom right, #cde6f5, #8da7be);
   color: #554640;
   padding: 12px;
   margin: 10px auto 25px;
   max-width: 420px;
-  border: 1px solid #87919e;
+  border: 1px solid #a7b6c2;
   border-radius: 10px;
   font-weight: 600;
 }
@@ -367,8 +337,6 @@ select {
 
 .cart-badge:hover {
   background-color: var(--btn-hover);
-  color: white;
-  cursor: pointer;
 }
 
 .cart-item-row,
@@ -381,7 +349,7 @@ select {
 .cart-item-row {
   gap: 20px;
   padding: 16px 0;
-  border-bottom: 1px solid #87919e;
+  border-bottom: 1px solid #a7b6c2;
 }
 
 .cart-item-row:last-child {
