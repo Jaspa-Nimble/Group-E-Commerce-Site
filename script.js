@@ -104,9 +104,15 @@ function addToCart(name) {
   }, 2200);
 }
 
-function removeCartItem(index) {
+function removeCartItem(name) {
   const cart = getCartItems();
-  cart.splice(index, 1);
+
+  const index = cart.lastIndexOf(name);
+  if(index !== -1)
+  {
+    cart.splice(index, 1);
+  }
+  
   saveCartItems(cart);
   updateCartCount();
   loadCart();
@@ -141,24 +147,43 @@ function loadCart() {
 
   let subtotal = 0;
 
-  cart.forEach((item, index) => {
-    const price = getProductPrice(item);
+  const grouped = {};
+
+  for(let i = 0; i < cart.length; i++)
+  {
+    const item = cart[i];
+
+    if(grouped[item])
+    {
+      grouped[item] += 1;
+    }
+    else
+    {
+      grouped[item] = 1;
+    }
+  }
+
+  console.log(grouped);
+
+  Object.entries(grouped).forEach(([name, quantity]) => {
+    const price = getProductPrice(name) * quantity;
     subtotal += price;
 
     cartItemsDiv.innerHTML += `
       <div class="cart-item-row">
         <div>
-          <h5 class="mb-1">${item}</h5>
-          <p class="mb-0 text-muted">Standard item</p>
+          <h5 class="mb-1">${name}</h5>
+          <p class="mb-0 text-muted">Quantity x${quantity}</p>
         </div>
         <div class="cart-item-right">
           <div class="cart-price">$${price.toFixed(2)}</div>
-          <button class="remove-btn" onclick="removeCartItem(${index})">Remove</button>
+          <button class="remove-btn" onclick="removeCartItem('${name}')">Remove</button>
         </div>
       </div>
     `;
-  });
 
+    console.log(name, quantity);
+  });
   const tax = subtotal * 0.08;
   const total = subtotal + tax;
 
