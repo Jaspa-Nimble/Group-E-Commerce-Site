@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
   revealOnScroll();
   updateCartCount();
   loadCart();
+  loadTheme();
 });
 
 function highlightCurrentPage() {
@@ -65,11 +66,11 @@ function saveCartItems(cart) {
 
 function getProductPrice(name) {
   const prices = {
-    "Gallon of Gas": 18.99,
-    "Bucket of Tadpoles": 49.99,
-    "Piece of the Artimis II": 29.99,
+    "Gallon of Gas": 8.99,
+    "Bucket of Tadpoles": 39.99,
+    "Piece of the Artimis II": 2999.99,
     "Coffee beans of some sort": 22.00,
-    "Diamond Pickaxe": 79.99,
+    "Diamond Pickaxe": 799.99,
     "Farmers Almanac": 14.99
   };
 
@@ -103,9 +104,15 @@ function addToCart(name) {
   }, 2200);
 }
 
-function removeCartItem(index) {
+function removeCartItem(name) {
   const cart = getCartItems();
-  cart.splice(index, 1);
+
+  const index = cart.lastIndexOf(name);
+  if(index !== -1)
+  {
+    cart.splice(index, 1);
+  }
+  
   saveCartItems(cart);
   updateCartCount();
   loadCart();
@@ -140,24 +147,43 @@ function loadCart() {
 
   let subtotal = 0;
 
-  cart.forEach((item, index) => {
-    const price = getProductPrice(item);
+  const grouped = {};
+
+  for(let i = 0; i < cart.length; i++)
+  {
+    const item = cart[i];
+
+    if(grouped[item])
+    {
+      grouped[item] += 1;
+    }
+    else
+    {
+      grouped[item] = 1;
+    }
+  }
+
+  console.log(grouped);
+
+  Object.entries(grouped).forEach(([name, quantity]) => {
+    const price = getProductPrice(name) * quantity;
     subtotal += price;
 
     cartItemsDiv.innerHTML += `
       <div class="cart-item-row">
         <div>
-          <h5 class="mb-1">${item}</h5>
-          <p class="mb-0 text-muted">Standard item</p>
+          <h5 class="mb-1">${name}</h5>
+          <p class="mb-0 text-muted">Quantity x${quantity}</p>
         </div>
         <div class="cart-item-right">
           <div class="cart-price">$${price.toFixed(2)}</div>
-          <button class="remove-btn" onclick="removeCartItem(${index})">Remove</button>
+          <button class="remove-btn" onclick="removeCartItem('${name}')">Remove</button>
         </div>
       </div>
     `;
-  });
 
+    console.log(name, quantity);
+  });
   const tax = subtotal * 0.08;
   const total = subtotal + tax;
 
@@ -165,6 +191,7 @@ function loadCart() {
   subtotalDiv.textContent = "$" + subtotal.toFixed(2);
   taxDiv.textContent = "$" + tax.toFixed(2);
   totalDiv.textContent = "$" + total.toFixed(2);
+  updateShipping();
 }
 
 function sendMessage() {
@@ -192,4 +219,125 @@ function sendMessage() {
   emailInput.value = "";
   subjectInput.value = "";
   messageInput.value = "";
+}
+function placeOrder() {
+  const inputs = document.querySelectorAll(".form-box input");
+
+
+for (let input of inputs) {
+  if (input.value.trim() === "") {
+    alert("Please fill in all fields before placing your order.");
+    return;
+  }
+}
+
+
+const cardNumber = document.getElementById("card-number").value.replace(/\s/g, "");
+const exp = document.getElementById("card-exp").value;
+const cvv = document.getElementById("card-cvv").value;
+
+if (cardNumber.length !== 16) {
+  alert("Card number must be 16 digits.");
+  return;
+}
+
+if (!/^\d{2}\/\d{2}$/.test(exp)) {
+  alert("Expiration must be in MM/YY format.");
+  return;
+}
+
+const month = parseInt(exp.split("/")[0]);
+if (month < 1 || month > 12) {
+  alert("Expiration month must be between 01 and 12.");
+  return;
+}
+
+if (cvv.length !== 3) {
+  alert("CVV must be 3 digits.");
+  return;
+}
+
+  
+  localStorage.removeItem("cartItems");
+  updateCartCount();
+  loadCart();
+
+  
+  const successBox = document.getElementById("order-success");
+  if (successBox) {
+    successBox.style.display = "block";
+    successBox.scrollIntoView({ behavior: "smooth" });
+  }
+
+ 
+  const btn = document.querySelector(".send-btn");
+  if (btn) {
+    btn.disabled = true;
+    btn.textContent = "Order Placed";
+  }
+}
+
+function formatCardNumber(input) {
+  let digits = input.value.replace(/\D/g, "");
+
+  digits = digits.substring(0, 16);
+
+  let formatted = digits.replace(/(.{4})/g, "$1 ").trim();
+
+  input.value = formatted;
+}
+
+function formatExpiration(input) {
+  let digits = input.value.replace(/\D/g, "");
+
+  digits = digits.substring(0, 4);
+
+  if (digits.length >= 3) {
+    input.value = digits.substring(0, 2) + "/" + digits.substring(2);
+  } else {
+    input.value = digits;
+  }
+}
+
+function formatCVV(input) {
+  let digits = input.value.replace(/\D/g, "");
+  input.value = digits.substring(0, 3);
+}
+function updateShipping() {
+  const selected = document.querySelector('input[name="shipping"]:checked');
+  if (!selected) return;
+
+  const shipping = parseFloat(selected.value);
+
+  const subtotal = parseFloat(document.getElementById("cart-subtotal").textContent.replace("$", ""));
+
+  const tax = (subtotal + shipping) * 0.08;
+  const total = subtotal + shipping + tax;
+
+  document.getElementById("shipping-cost").textContent = "$" + shipping.toFixed(2);
+  document.getElementById("cart-tax").textContent = "$" + tax.toFixed(2);
+  document.getElementById("cart-total").textContent = "$" + total.toFixed(2);
+}
+
+function setTheme(themeName) {
+  document.body.setAttribute('data-theme', themeName);
+  
+
+  if (themeName === 'dark') {
+    document.body.classList.add("dark-theme");
+  } else {
+    document.body.classList.remove("dark-theme");
+  }
+
+  const themeBtn = document.getElementById('theme-dropdown-btn');
+  if (themeBtn) {
+    themeBtn.innerText = (themeName === 'crazy') ? "Crazy Mode!" : "Themes";
+  }
+
+  localStorage.setItem("theme", themeName);
+}
+
+function loadTheme() {
+  const savedTheme = localStorage.getItem("theme") || "light";
+  setTheme(savedTheme);
 }

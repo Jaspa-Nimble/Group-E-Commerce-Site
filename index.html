@@ -29,6 +29,25 @@
           <a class="nav-link" href="products.html">Products</a>
           <a class="nav-link" href="contact.html">Contact</a>
           <a href="cart.html" id="cart-count" class="cart-badge">Cart: 0</a>
+          <div class="dropdown ms-2">
+  <button class="btn btn-sm btn-light dropdown-toggle" type="button" id="theme-dropdown-btn" data-bs-toggle="dropdown" aria-expanded="false">
+    Themes
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end shadow">
+    <li><button class="dropdown-item" onclick="setTheme('light')">Default Light</button></li>
+    <li><button class="dropdown-item" onclick="setTheme('dark')">Midnight Dark</button></li>
+    <li><button class="dropdown-item" onclick="setTheme('sunset')">Warm Sunset</button></li>
+    <li><button class="dropdown-item" onclick="setTheme('crazy')">⚠️ Neon Crazy</button></li>
+  </ul>
+</div>
+          <!--
+          <button class="btn btn-bd-primary dropdown-toggle" id="bd-theme" type="button" aria-expanded="false" data-bs-toggle="dropdown"> 
+            <svg class="bi my-1 theme-icon-active" aria-hidden="true">
+              <use href="#moon-stars-fill"></use>
+            </svg> 
+            <span class="" id="bd-theme-text">Toggle theme</span> 
+          </button>
+          -->
         </div>
       </div>
     </div>

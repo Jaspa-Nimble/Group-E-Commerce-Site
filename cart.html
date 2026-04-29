@@ -27,6 +27,17 @@
           <a class="nav-link" href="products.html">Products</a>
           <a class="nav-link" href="contact.html">Contact</a>
           <a href="cart.html" id="cart-count" class="cart-badge">Cart: 0</a>
+          <div class="dropdown ms-2">
+  <button class="btn btn-sm btn-light dropdown-toggle" type="button" id="theme-dropdown-btn" data-bs-toggle="dropdown" aria-expanded="false">
+    Themes
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end shadow">
+    <li><button class="dropdown-item" onclick="setTheme('light')">Default Light</button></li>
+    <li><button class="dropdown-item" onclick="setTheme('dark')">Midnight Dark</button></li>
+    <li><button class="dropdown-item" onclick="setTheme('sunset')">Warm Sunset</button></li>
+    <li><button class="dropdown-item" onclick="setTheme('crazy')">⚠️ Neon Crazy</button></li>
+  </ul>
+</div>
         </div>
       </div>
     </div>
@@ -68,7 +79,11 @@
             <span id="cart-total">$0.00</span>
           </div>
 
-          <button class="send-btn mt-3 w-100">Proceed to Checkout</button>
+          
+          <a href="./checkout.html" class="send-btn mt-3 w-100 text-center d-block">
+            Proceed to Checkout
+          </a>
+
           <button class="clear-cart-btn mt-3 w-100" onclick="clearCart()">Clear Cart</button>
         </div>
       </div>

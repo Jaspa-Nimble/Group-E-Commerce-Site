@@ -1,19 +1,19 @@
 :root {
-  --bg: linear-gradient(to bottom right, #eef5ff, #f8fbff);
-  --nav: #1e3a8a;
-  --nav-hover: #93c5fd;
-  --btn: #2563eb;
-  --btn-hover: #1e40af;
-  --text-dark: #1e3a8a;
-  --text-body: #555;
-  --text-soft: #777;
-  --card-bg: linear-gradient(180deg, #ffffff, #f4f8ff);
-  --card-border: #e0e7ff;
-  --success-bg: #d1e7dd;
-  --success-border: #badbcc;
-  --success-text: #0f5132;
-  --shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-  --shadow-hover: 0 12px 26px rgba(0, 0, 0, 0.12);
+  --bg: linear-gradient(to bottom right, #cde6f5, #8da7be);
+  --nav: #554640;
+  --nav-hover: #8da7be;
+  --btn: #707078;
+  --btn-hover: #554640;
+  --text-dark: #554640;
+  --text-body: #4f4f57;
+  --text-soft: #6b6b75;
+  --card-bg: #e7f4fb;
+  --card-border: #a7b6c2;
+  --success-bg: #8da7be;
+  --success-border: #554640;
+  --success-text: #ffffff;
+  --shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  --shadow-hover: 0 12px 26px rgba(0, 0, 0, 0.25);
   --radius-lg: 16px;
   --radius-md: 8px;
 }
@@ -22,17 +22,28 @@ html {
   scroll-behavior: smooth;
 }
 
+html, body {
+  height: 100%;
+}
+
 body {
   font-family: Arial, sans-serif;
   background: var(--bg);
-  color: #222;
+  color: var(--text-body);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  transition: background 0.4s ease, color 0.4s ease;
 }
 
+.container {
+  flex: 1;
+}
 
 .custom-navbar,
 footer {
   background-color: var(--nav);
-  color: white;
+  color: #ffffff;
 }
 
 .custom-navbar {
@@ -41,7 +52,7 @@ footer {
 
 .navbar-brand,
 .nav-link {
-  color: white !important;
+  color: #ffffff !important;
   font-weight: 600;
 }
 
@@ -52,11 +63,10 @@ footer a:hover {
 }
 
 footer a {
-  color: #dee2e6;
+  color: #ffffff;
   text-decoration: none;
   margin: 0 8px;
 }
-
 
 .page-title,
 .team-title {
@@ -74,7 +84,6 @@ footer a {
 .hero-box p {
   color: var(--text-body);
 }
-
 
 .hero-box,
 .content-box,
@@ -103,7 +112,6 @@ footer a {
   box-shadow: var(--shadow-hover);
 }
 
-
 .hero-box,
 .content-box,
 .form-box,
@@ -122,7 +130,6 @@ footer a {
 .feature-card {
   height: 100%;
 }
-
 
 .hero-box h2,
 .feature-card h3,
@@ -156,7 +163,7 @@ footer a {
 }
 
 .content-box h2 {
-  border-left: 5px solid #f8c146;
+  border-left: 5px solid #554640;
   padding-left: 10px;
   margin-top: 1.5rem;
   font-size: 1.4rem;
@@ -165,7 +172,6 @@ footer a {
 .content-box h2:first-child {
   margin-top: 0;
 }
-
 
 .hero-box p {
   line-height: 1.7;
@@ -187,10 +193,9 @@ footer a {
 }
 
 .feature-card p {
-  color: #666;
+  color: var(--text-soft);
   margin-bottom: 0;
 }
-
 
 .shop-btn,
 .cart-btn,
@@ -242,7 +247,7 @@ footer a {
 }
 
 .remove-btn {
-  background-color: #dc2626;
+  background-color: #554640;
   color: white;
   padding: 7px 12px;
   border-radius: var(--radius-md);
@@ -250,18 +255,17 @@ footer a {
 }
 
 .remove-btn:hover {
-  background-color: #b91c1c;
+  background-color: #707078;
 }
 
 .clear-cart-btn {
-  background-color: #6b7280;
+  background-color: #87919e;
   color: white;
 }
 
 .clear-cart-btn:hover {
-  background-color: #4b5563;
+  background-color: #707078;
 }
-
 
 .form-label {
   font-weight: 700;
@@ -276,8 +280,8 @@ footer a {
 
 .form-control:focus,
 .form-select:focus {
-  border-color: #86b7fe;
-  box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.15);
+  border-color: #8da7be;
+  box-shadow: 0 0 0 3px rgba(141, 167, 190, 0.35);
 }
 
 #success {
@@ -291,7 +295,6 @@ footer a {
   border-radius: var(--radius-md);
   font-weight: 600;
 }
-
 
 .price,
 .cart-price {
@@ -311,12 +314,12 @@ footer a {
 #cart-message {
   display: none;
   text-align: center;
-  background: linear-gradient(135deg, #fff3cd, #fff8df);
-  color: #856404;
+  background: linear-gradient(135deg, #cde6f5, #8da7be);
+  color: #554640;
   padding: 12px;
   margin: 10px auto 25px;
   max-width: 420px;
-  border: 1px solid #ffe69c;
+  border: 1px solid #a7b6c2;
   border-radius: 10px;
   font-weight: 600;
 }
@@ -351,7 +354,7 @@ footer a {
 .cart-item-row {
   gap: 20px;
   padding: 16px 0;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid var(--card-border);
 }
 
 .cart-item-row:last-child {
@@ -368,14 +371,13 @@ footer a {
 }
 
 .total-row {
-  border-top: 1px solid #dbeafe;
+  border-top: 1px solid #8da7be;
   margin-top: 10px;
   padding-top: 16px;
   font-size: 1.1rem;
   font-weight: 700;
   color: var(--text-dark);
 }
-
 
 .reveal {
   opacity: 0;
@@ -387,7 +389,6 @@ footer a {
   transform: translateY(0);
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
-
 
 @media (max-width: 768px) {
   .page-title {
@@ -413,8 +414,79 @@ footer a {
   }
 }
 
-img
-{
+img {
   height: auto;
   width: 150px;
+}
+
+.dark-theme {
+  --bg: linear-gradient(to bottom right, #000000, #0c1821);
+  --nav: #0c1821;
+  --nav-hover: #ccc9dc;
+  --btn: #324a5f;
+  --btn-hover: #1b2a41;
+  --text-dark: #ccc9dc;
+  --text-body: #ccc9dc;
+  --text-soft: #94a3b8;
+  --card-bg: #1b2a41;
+  --card-border: #324a5f;
+  --success-bg: #1b2a41;
+  --success-border: #324a5f;
+  --success-text: #ccc9dc;
+  color: #ccc9dc;
+}
+
+[data-theme="sunset"] {
+  --bg: linear-gradient(to bottom right, #ff9a9e, #fad0c4) !important;
+  --nav: #6e4545;
+  --nav-hover: #ffffff;
+  --btn: #d46a6a;
+  --btn-hover: #6e4545;
+  --text-dark: #4a2c2c;
+  --text-body: #5a3d3d;
+  --card-bg: #fff5f5;
+  --card-border: #ffb3b3;
+  background: var(--bg) !important;
+}
+
+/* Neon Crazy Theme */
+[data-theme="crazy"] {
+  --bg: repeating-radial-gradient(circle, #ff00ff, #00ffff 5%, #ffff00 10%) !important;
+  --nav: #000000;
+  --nav-hover: #00ff00;
+  --btn: #00ff00;
+  --btn-hover: #ff00ff;
+  --text-dark: #ff00ff;
+  --text-body: #0000ff;
+  --card-bg: rgba(255, 255, 255, 0.9);
+  --card-border: #ff00ff;
+  background: var(--bg) !important;
+}
+
+/* Fix visibility for Nav/Brand in themed modes */
+[data-theme="sunset"] .navbar-brand, 
+[data-theme="sunset"] .nav-link,
+[data-theme="crazy"] .navbar-brand,
+[data-theme="crazy"] .nav-link {
+    color: #ffffff !important;
+}
+
+/* Crazy Mode Animation */
+[data-theme="crazy"] .page-title {
+  animation: shake 0.2s infinite;
+  text-shadow: 3px 3px #00ffff;
+  color: #ff00ff !important;
+}
+
+@keyframes shake {
+  0% { transform: translate(1px, 1px) rotate(0deg); }
+  50% { transform: translate(-3px, 0px) rotate(1deg); }
+  100% { transform: translate(1px, 1px) rotate(0deg); }
+}
+
+/* Ensure footer links don't turn brown in themed modes */
+[data-theme="dark"] footer a,
+[data-theme="sunset"] footer a,
+[data-theme="crazy"] footer a {
+    color: #ffffff !important;
 }
